@@ -1,6 +1,7 @@
+@import "tailwindcss/utilities" layer(utilities);
+@import "tailwindcss/preflight" layer(utilities);
+
 @reference "tailwindcss";
-@import "tailwindcss/preflight";
-@import "tailwindcss/utilities";
 
 @layer base {
   :root {
@@ -65,5 +66,12 @@
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
+    font-family: "Manrope", sans-serif;
   }
+}
+
+@theme {
+  --color-primary: #53d22d;
+  --color-light-bg: #f6f8f6;
+  --color-dark-bg: #152012;
 }
