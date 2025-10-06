@@ -1,5 +1,14 @@
-import { createBrowserRouter } from "react-router";
-import { ThemeProvider } from "@components/themes/theme-provider";
+import { createBrowserRouter, Outlet } from "react-router";
+import { lazy } from "react";
+import Navbar from "@/components/navbar";
+import { ThemeProvider } from "@/components/themes/theme-provider";
+
+const Dashboard = lazy(() => import("./dashboard"));
+const Categories = lazy(() => import("./categories"));
+const Transactions = lazy(() => import("./transactions"));
+const NewTransaction = lazy(() => import("./new-transaction"));
+const Reports = lazy(() => import("./reports"));
+const Settings = lazy(() => import("./settings"));
 
 const router = createBrowserRouter([
   {
@@ -7,17 +16,35 @@ const router = createBrowserRouter([
     element: (
       <>
         <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-          {/* <Suspense fallback={<Preloader />}> */}
-            {/* <ScrollToTop /> */}
-            {/* <Pagelayout /> */}
-          {/* </Suspense> */}
+          <Outlet />
+          <Navbar />
         </ThemeProvider>
       </>
     ),
     children: [
       {
         index: true,
-        element: <Home />,
+        element: <Dashboard />,
+      },
+      {
+        path: "categories",
+        element: <Categories />,
+      },
+      {
+        path: "transactions",
+        element: <Transactions />,
+      },
+      {
+        path: "transactions/new",
+        element: <NewTransaction />,
+      },
+      {
+        path: "reports",
+        element: <Reports />,
+      },
+      {
+        path: "settings",
+        element: <Settings />,
       },
     ],
   },

@@ -1,7 +1,7 @@
 import { RouterProvider } from "react-router";
+import router from "./routes";
 
 function App() {
-
   return (
     <>
       <RouterProvider router={router} />
@@ -9,4 +9,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
