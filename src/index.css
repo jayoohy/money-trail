@@ -70,7 +70,7 @@
   }
 }
 
-@theme {
+@theme inline {
   --color-primary: #53d22d;
   --color-light-bg: #f6f8f6;
   --color-dark-bg: #152012;

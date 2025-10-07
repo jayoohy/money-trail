@@ -14,19 +14,19 @@ const Navbar = () => {
       >
         <div className="flex flex-col items-center">
           <LayoutDashboard className="size-7" />
-          <p className="text-[0.9rem] pt-1">Dashboard</p>
+          <p className="text-sm pt-1">Dashboard</p>
         </div>
         <div className="flex flex-col items-center">
           <ScrollText className="size-7" />
-          <p className="text-[0.9rem] pt-1">Transactions</p>
+          <p className="text-sm pt-1">Transactions</p>
         </div>
         <div className="flex flex-col items-center">
           <Shapes className="size-7" />
-          <p className="text-[0.9rem] pt-1">Categories</p>
+          <p className="text-sm pt-1">Categories</p>
         </div>
         <div className="flex flex-col items-center">
           <Settings className="size-7" />
-          <p className="text-[0.9rem] pt-1">Settings</p>
+          <p className="text-sm pt-1">Settings</p>
         </div>
       </div>
     </>
