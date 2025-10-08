@@ -1,5 +1,6 @@
 "use client";
 
+import * as React from "react";
 import { Bar, BarChart, XAxis } from "recharts";
 
 import {
@@ -28,23 +29,34 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function ChartBarDefault() {
+  const totalAmount = React.useMemo(() => {
+    return chartData.reduce((acc, curr) => acc + curr.amount, 0);
+  }, []);
   return (
-    <div className="flex justify-center">
-      <ChartContainer className="h-[40vh] w-[50vw]" config={chartConfig}>
-        <BarChart accessibilityLayer data={chartData}>
-          <XAxis
-            dataKey="category"
-            tickLine={false}
-            tickMargin={10}
-            axisLine={false}
-          />
-          <ChartTooltip
-            cursor={false}
-            content={<ChartTooltipContent hideLabel />}
-          />
-          <Bar dataKey="amount" fill="var(--color-desktop)" radius={8} />
-        </BarChart>
-      </ChartContainer>
+    <div>
+      <div className="p-3">
+        <p className="text-sm text-gray-600">Spending by Category</p>
+        <p className="font-semibold text-black text-[1.3rem]">
+          ${totalAmount.toLocaleString()}
+        </p>
+      </div>
+      <div className="flex justify-center">
+        <ChartContainer className="h-[40vh] w-[50vw]" config={chartConfig}>
+          <BarChart accessibilityLayer data={chartData}>
+            <XAxis
+              dataKey="category"
+              tickLine={false}
+              tickMargin={10}
+              axisLine={false}
+            />
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent hideLabel />}
+            />
+            <Bar dataKey="amount" fill="var(--color-desktop)" radius={8} />
+          </BarChart>
+        </ChartContainer>
+      </div>
     </div>
   );
 }
