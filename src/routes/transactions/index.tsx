@@ -15,6 +15,7 @@ const Transactions = () => {
           <Plus />
         </div>
       </div>
+      <div></div>
     </div>
   );
 };

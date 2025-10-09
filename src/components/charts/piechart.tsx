@@ -51,6 +51,7 @@ export function ChartPieDonutText() {
 
   return (
     <div>
+      <p className="p-3 text-sm text-gray-600">Spending by Category</p>
       <ChartContainer
         config={chartConfig}
         className="mx-auto aspect-square max-h-[250px]"

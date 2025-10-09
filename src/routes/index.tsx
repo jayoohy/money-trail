@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     path: "/",
     element: (
       <>
-        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
           <Outlet />
           <Navbar />
         </ThemeProvider>
