@@ -7,8 +7,8 @@ const Navbar = () => {
     <>
       <div
         className={cn(
-          "flex justify-between fixed bottom-0 right-0 left-0 bg-[#f6f8f6]",
-          "border-t-1 border-gray-600! p-5 text-gray-600",
+          "flex justify-between fixed bottom-0 right-0 left-0 bg-light-bg dark:bg-dark-bg",
+          "border-t-1 border-gray-600! p-5 text-gray-600 dark:text-gray-400",
           "md:right-[25%] md:left-[25%] md:border-2 md:mb-5 md:rounded-lg md:py-3",
           "lg:right-[34%] lg:left-[34%] xl:justify-around",
           "*:hover:text-primary"

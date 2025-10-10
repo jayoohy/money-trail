@@ -8,9 +8,11 @@ import { Plus } from "lucide-react";
 const Dashboard = () => {
   return (
     <>
-      <div className="bg-light-bg px-3 pb-30">
+      <div className="bg-light-bg dark:bg-dark-bg px-3 pb-30">
         <div className="flex justify-center">
-          <h1 className="font-semibold text-xl pt-4 mb-6">Dashboard</h1>
+          <h1 className="font-semibold text-xl dark:text-white pt-4 mb-6">
+            Dashboard
+          </h1>
           <div
             className={cn(
               "flex h-7 w-7 items-center justify-center mt-4 rounded-full",

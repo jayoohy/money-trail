@@ -50,13 +50,13 @@ export function ChartPieDonutText() {
   }, []);
 
   return (
-    <div>
-      <p className="p-3 text-sm text-gray-600">Spending by Category</p>
+    <div className="text-gray-600 dark:text-gray-400">
+      <p className="p-3 text-sm">Spending by Category</p>
       <ChartContainer
         config={chartConfig}
         className="mx-auto aspect-square max-h-[250px]"
       >
-        <PieChart>
+        <PieChart className="text-black dark:text-white">
           <ChartTooltip
             cursor={false}
             content={<ChartTooltipContent hideLabel />}
@@ -78,17 +78,13 @@ export function ChartPieDonutText() {
                       textAnchor="middle"
                       dominantBaseline="middle"
                     >
-                      <tspan
-                        x={viewBox.cx}
-                        y={(viewBox.cy || 0) - 28}
-                        className="fill-muted-foreground"
-                      >
+                      <tspan x={viewBox.cx} y={(viewBox.cy || 0) - 28}>
                         Total spent
                       </tspan>
                       <tspan
                         x={viewBox.cx}
                         y={viewBox.cy}
-                        className="fill-foreground text-3xl font-bold"
+                        className="text-3xl font-bold"
                       >
                         ${totalAmount.toLocaleString()}
                       </tspan>
@@ -104,21 +100,27 @@ export function ChartPieDonutText() {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="h-3 w-3 rounded-full bg-[#4ade80]"></span>
-            <span className="text-sm text-gray-600">Food & Dining</span>
+            <span className="text-sm text-gray-600 dark:text-gray-400">
+              Food & Dining
+            </span>
           </div>
           <span className="font-medium">$720</span>
         </div>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="h-3 w-3 rounded-full bg-[#facc15]"></span>
-            <span className="text-sm text-gray-600">Transportation</span>
+            <span className="text-sm text-gray-600 dark:text-gray-400">
+              Transportation
+            </span>
           </div>
           <span className="font-medium">$300</span>
         </div>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="h-3 w-3 rounded-full bg-[#60a5fa]"></span>
-            <span className="text-sm text-gray-600">Utilities</span>
+            <span className="text-sm text-gray-600 dark:text-gray-400">
+              Utilities
+            </span>
           </div>
           <span className="font-medium">$180</span>
         </div>

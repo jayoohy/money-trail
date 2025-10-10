@@ -40,10 +40,10 @@ export function ChartAreaDefault() {
     return chartData.reduce((acc, curr) => acc + curr.amount, 0);
   }, []);
   return (
-    <div>
+    <div className="text-gray-600 dark:text-gray-400">
       <div className="p-3">
-        <p className="text-sm text-gray-600">Balance Snapshot</p>
-        <p className="font-semibold text-black text-[1.3rem]">
+        <p className="text-sm">Balance Snapshot</p>
+        <p className="font-semibold text-black dark:text-white text-[1.3rem]">
           ${totalAmount.toLocaleString()}
         </p>
       </div>

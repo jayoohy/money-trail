@@ -35,8 +35,10 @@ export function ChartBarDefault() {
   return (
     <div>
       <div className="p-3">
-        <p className="text-sm text-gray-600">Spending by Category</p>
-        <p className="font-semibold text-black text-[1.3rem]">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
+          Spending by Category
+        </p>
+        <p className="font-semibold text-black dark:text-white text-[1.3rem]">
           ${totalAmount.toLocaleString()}
         </p>
       </div>
