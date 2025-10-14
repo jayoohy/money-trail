@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 
 interface EnhancedImageProps extends LazyLoadImageProps {
   isZoomed?: boolean;
+  containerClassName?: string;
 }
 
 const Image = ({ isZoomed = false, ...props }: EnhancedImageProps) => {

@@ -1,14 +1,17 @@
 import { ChartAreaDefault } from "../charts/areachart";
+import { Card, CardContent } from "../ui/card";
 
 const Balance = () => {
   return (
-    <div className="mt-6 hidden md:grid">
-      <p className="font-semibold text-[1.2rem] dark:text-white pb-2">
+    <div className="mt-6 hidden md:block">
+      <p className="font-semibold text-lg text-foreground pb-2">
         Balance Over Time
       </p>
-      <div className="bg-white dark:bg-[#1e2a1b] rounded-lg px-4 pb-4">
-        <ChartAreaDefault />
-      </div>
+      <Card className="py-0 dark:bg-green/10">
+        <CardContent className="px-0 pb-4">
+          <ChartAreaDefault />
+        </CardContent>
+      </Card>
     </div>
   );
 };

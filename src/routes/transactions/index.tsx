@@ -3,20 +3,25 @@ import { ChevronDown, Plus } from "lucide-react";
 
 const Transactions = () => {
   return (
-    <div className="px-3 pb-30 md:mx-20 lg:mx-40 xl:mx-50">
+    <div className="px-3 pb-30 md:px-20 lg:px-40 xl:px-50 bg-bg">
       <div className="flex justify-center">
         <h1 className="font-semibold text-xl pt-4 mb-6">Transactions</h1>
         <div
           className={cn(
-            "flex h-7 w-7 items-center justify-center mt-4 rounded-full",
-            "bg-[#53d22d]/30 text-[#53d22d] absolute right-[7%] md:right-[15%] xl:right-[18%]"
+            "flex h-7 w-7 items-center justify-center mt-4 rounded-full hover:bg-green/40",
+            "bg-green/30 text-green absolute right-[7%] md:right-[15%] xl:right-[18%]"
           )}
         >
           <Plus />
         </div>
       </div>
 
-      <div className="flex gap-4 justify-center **:first:pr-2 *:items-center">
+      <div
+        className={cn(
+          "flex gap-4 justify-center **:first:pr-2 *:items-center",
+          "dark:*:bg-zinc-500/30 dark:*:text-white"
+        )}
+      >
         <div className="flex bg-zinc-300 rounded-full p-2 text-gray-700 ">
           <p>Category</p>
           <ChevronDown className="size-5" />
@@ -79,10 +84,10 @@ const Transactions = () => {
       </div>
 
       <div className="flex gap-6 justify-center mt-5">
-        <div className="rounded-lg bg-primary/30 text-primary py-4 px-6 font-bold">
+        <div className="rounded-lg bg-green/30 hover:bg-green/20 text-green py-4 px-6 font-bold">
           Edit
         </div>
-        <div className="rounded-lg bg-red-500/30 text-red-500 p-4 font-bold">
+        <div className="rounded-lg bg-red-500/30 hover:bg-red-500/20 text-red-500 p-4 font-bold">
           Delete
         </div>
       </div>

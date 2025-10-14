@@ -1,18 +1,22 @@
 import { ChartBarDefault } from "../charts/barchart";
 import { ChartPieDonutText } from "../charts/piechart";
+import { Card, CardContent } from "../ui/card";
 
 const Spending = () => {
   return (
     <div className="mt-6">
-      <p className="font-semibold text-[1.2rem] dark:text-white pb-2">
+      <p className="font-semibold text-lg text-foreground pb-2">
         Spending Breakdown
       </p>
-      <div className="bg-white dark:bg-[#1e2a1b] md:hidden rounded-lg px-4 pb-4">
-        <ChartPieDonutText />
-      </div>
-      <div className="bg-white dark:bg-[#1e2a1b] rounded-lg px-4 pb-4 hidden md:grid">
-        <ChartBarDefault />
-      </div>
+      <Card className="py-0 dark:bg-green/10">
+        <CardContent className="px-3 pb-4 md:hidden">
+          <ChartPieDonutText />
+        </CardContent>
+
+        <CardContent className="px-0 pb-4 hidden md:block">
+          <ChartBarDefault />
+        </CardContent>
+      </Card>
     </div>
   );
 };
