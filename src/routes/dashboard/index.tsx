@@ -1,16 +1,11 @@
+import { cn } from "@/lib/utils";
 import Balance from "@/components/dashboard-components/balance.component";
 import Overview from "@/components/dashboard-components/overview.component";
 import Recent from "@/components/dashboard-components/recent.component";
 import Spending from "@/components/dashboard-components/spending.component";
-import { cn } from "@/lib/utils";
-import { selectCategories } from "@/store/categories/categories.selector";
 import { Plus } from "lucide-react";
-import { useSelector } from "react-redux";
 
 const Dashboard = () => {
-  const categories = useSelector(selectCategories);
-  console.log(categories);
-
   return (
     <>
       <div className="bg-bg px-3 pb-30">
