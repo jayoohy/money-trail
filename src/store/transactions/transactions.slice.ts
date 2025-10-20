@@ -24,21 +24,12 @@ export const transactionsSlice = createSlice({
         state.transactions = [action.payload];
       }
     },
-    deleteTransaction: (state, action: PayloadAction<string>) => {
-      if (state.transactions) {
-        const newTransaction = state.transactions.filter(
-          (category) => category.id != action.payload
-        );
-        state.transactions = newTransaction;
-      }
-    },
     clearTransactions: (state) => {
       state.transactions = null;
     },
   },
 });
 
-export const { addTransaction, deleteTransaction, clearTransactions } =
-  transactionsSlice.actions;
+export const { addTransaction, clearTransactions } = transactionsSlice.actions;
 
 export const transactionsReducer = transactionsSlice.reducer;
