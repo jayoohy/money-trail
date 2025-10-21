@@ -33,7 +33,6 @@ const Categories = () => {
     (category) => category.type === "expense"
   );
   const income = categories?.filter((category) => category.type === "income");
-  console.log(expenses, income);
 
   return (
     <div className="bg-bg px-3 pb-30 h-[100vh]">
