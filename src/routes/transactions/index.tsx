@@ -8,7 +8,6 @@ import { Link } from "react-router";
 
 export default function TransactionsPreview() {
   const transactions = useSelector(selectTransactions);
-  console.log(transactions);
 
   return (
     <div className="bg-bg h-[100vh] px-4 md:px-6 lg:px-20 xl:px-30 space-y-6">
