@@ -4,13 +4,6 @@ import { useState, type FC } from "react";
 import { EllipsisVertical } from "lucide-react";
 
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
@@ -19,6 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useDispatch } from "react-redux";
 import { deleteTransaction } from "@/store/transactions/transactions.slice";
+import DeleteDialog from "./delete-dialog";
 
 export type DropdownMenuDialogProps = {
   id: string;
@@ -47,24 +41,11 @@ const DropdownMenuDialog: FC<DropdownMenuDialogProps> = ({ id }) => {
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>
-      <Dialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
-        <DialogContent className="dark:bg-bg">
-          <DialogHeader>
-            <DialogTitle className="text-center">
-              Delete Transaction?
-            </DialogTitle>
-            <DialogDescription className="text-center">
-              Confirm that you want to delete this transaction
-            </DialogDescription>
-          </DialogHeader>
-          <button
-            className="rounded-lg text-center mx-[40%] bg-red-500/30 hover:bg-red-500/20 text-red-500 p-1"
-            onClick={() => deleteHandler()}
-          >
-            Delete
-          </button>
-        </DialogContent>
-      </Dialog>
+      <DeleteDialog
+        open={showDeleteDialog}
+        onOpenChange={setShowDeleteDialog}
+        callback={deleteHandler}
+      />
     </>
   );
 };
