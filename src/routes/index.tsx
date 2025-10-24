@@ -6,7 +6,6 @@ import { ThemeProvider } from "@/components/themes/theme-provider";
 const Dashboard = lazy(() => import("./dashboard"));
 const Categories = lazy(() => import("./categories"));
 const Transactions = lazy(() => import("./transactions"));
-const NewTransaction = lazy(() => import("./new-transaction"));
 const Reports = lazy(() => import("./reports"));
 const Settings = lazy(() => import("./settings"));
 
@@ -33,10 +32,6 @@ const router = createBrowserRouter([
       {
         path: "transactions",
         element: <Transactions />,
-      },
-      {
-        path: "transactions/new",
-        element: <NewTransaction />,
       },
       {
         path: "reports",

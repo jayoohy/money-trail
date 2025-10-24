@@ -9,9 +9,7 @@ const Navbar = () => {
         className={cn(
           "flex justify-between fixed bottom-0 right-0 left-0 bg-bg",
           "border-t-1 md:border-2 border-gray-600! p-5 text-gray-600 dark:text-gray-400",
-          // "md:right-[25%] md:left-[25%] md:border-2 md:rounded-lg md:py-3",
-          // "lg:right-[34%] lg:left-[34%] xl:justify-around",
-          "mx-auto max-w-xl md:rounded-lg md:bottom-2",
+          "mx-auto md:max-w-lg md:rounded-lg md:bottom-2",
           "*:hover:text-green"
         )}
       >

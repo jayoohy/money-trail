@@ -1,10 +1,11 @@
 import TransactionItem1 from "@/components/transaction-components/laptop";
 import TransactionItem2 from "@/components/transaction-components/mobile";
+import { SheetDemo } from "@/components/transaction-components/sheet";
+import { SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { selectTransactions } from "@/store/transactions/transactions.selector";
 import { Plus } from "lucide-react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router";
 
 export default function TransactionsPreview() {
   const transactions = useSelector(selectTransactions);
@@ -16,15 +17,20 @@ export default function TransactionsPreview() {
         <h1 className="font-semibold text-xl dark:text-white pt-4 mb-6">
           Transactions
         </h1>
-        <Link
-          to="/transactions/new"
-          className={cn(
-            "flex h-7 w-7 items-center justify-center mt-4 rounded-full",
-            "bg-green/30 hover:bg-green/40 text-green absolute right-[7%]"
-          )}
-        >
-          <Plus />
-        </Link>
+        <SheetDemo
+          trigger={
+            <SheetTrigger asChild>
+              <div
+                className={cn(
+                  "flex h-7 w-7 items-center justify-center mt-4 rounded-full",
+                  "bg-green/30 hover:bg-green/40 text-green absolute right-[7%]"
+                )}
+              >
+                <Plus />
+              </div>
+            </SheetTrigger>
+          }
+        />
       </div>
 
       {/* Table View (Desktop) */}

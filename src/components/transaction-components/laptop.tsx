@@ -23,7 +23,7 @@ const TransactionItem1: FC<TransactionItemProps> = ({ t }) => {
   };
 
   return (
-    <tr className="bg-white dark:bg-green-primary/10 transition rounded-md">
+    <tr className="bg-white dark:bg-green/10 transition rounded-md">
       <td className="px-3 py-2 text-sm text-gray-600 dark:text-gray-400">
         {t.date}
       </td>

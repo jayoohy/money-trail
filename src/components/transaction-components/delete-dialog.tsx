@@ -23,7 +23,6 @@ const DeleteDialog = ({
 }: DeleteDialogProp) => {
   return (
     <>
-      {" "}
       <Dialog open={open} onOpenChange={onOpenChange}>
         {trigger}
         <DialogContent className="dark:bg-bg">
@@ -36,7 +35,6 @@ const DeleteDialog = ({
             </DialogDescription>
           </DialogHeader>
           <Button
-            // className="rounded-lg text-center mx-[40%] bg-red-500/30 hover:bg-red-500/20 text-red-500 p-1"
             className="max-w-2xl mx-auto bg-red-500/30 hover:bg-red-500/20 text-red-500"
             onClick={() => callback()}
           >
