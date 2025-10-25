@@ -1,14 +1,13 @@
 "use client";
 
-import * as React from "react";
 import { Area, AreaChart, XAxis } from "recharts";
 
 import {
-  type ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { chartConfig, type ChartTextProps } from "./chart-constants";
 
 export const description = "A simple area chart";
 
@@ -27,24 +26,13 @@ const chartData = [
   { month: "Dec", amount: 200 },
 ];
 
-const chartConfig = {
-  Food: { color: "var(--chart-1)" },
-  Transport: { color: "var(--chart-2)" },
-  Fun: { color: "var(--chart-3)" },
-  Utilities: { color: "var(--chart-4)" },
-  Others: { color: "var(--chart-5)" },
-} satisfies ChartConfig;
-
-export function ChartAreaDefault() {
-  const totalAmount = React.useMemo(() => {
-    return chartData.reduce((acc, curr) => acc + curr.amount, 0);
-  }, []);
+export function ChartAreaDefault({ balance }: ChartTextProps) {
   return (
     <div className="text-gray-600 dark:text-gray-400">
       <div className="p-3">
         <p className="text-sm">Balance Snapshot</p>
         <p className="font-semibold text-black dark:text-white text-[1.3rem]">
-          ${totalAmount.toLocaleString()}
+          ₦{balance || 0}
         </p>
       </div>
       <div className="flex justify-center">

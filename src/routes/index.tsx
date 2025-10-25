@@ -1,7 +1,8 @@
-import { createBrowserRouter, Outlet } from "react-router";
+import { createBrowserRouter } from "react-router";
 import { lazy } from "react";
-import Navbar from "@/components/navbar";
 import { ThemeProvider } from "@/components/themes/theme-provider";
+import AppLayout from "@/layout";
+import CategoryPage from "./category";
 
 const Dashboard = lazy(() => import("./dashboard"));
 const Categories = lazy(() => import("./categories"));
@@ -15,8 +16,7 @@ const router = createBrowserRouter([
     element: (
       <>
         <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
-          <Outlet />
-          <Navbar />
+          <AppLayout />
         </ThemeProvider>
       </>
     ),
@@ -28,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "categories",
         element: <Categories />,
+      },
+      {
+        path: "categories/:category",
+        element: <CategoryPage />,
       },
       {
         path: "transactions",

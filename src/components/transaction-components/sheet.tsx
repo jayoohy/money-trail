@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -16,28 +18,38 @@ import { Textarea } from "../ui/textarea";
 import type { Transaction } from "@/store/transactions/transactions.types";
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch } from "react-redux";
-import { addTransaction } from "@/store/transactions/transactions.slice";
+import {
+  addTransaction,
+  updateTransactions,
+} from "@/store/transactions/transactions.slice";
+import { toast } from "sonner";
 
 interface SheetDemoProps {
   trigger?: ReactNode;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  transactionToEdit?: Transaction;
 }
 
-export function SheetDemo({ trigger }: SheetDemoProps) {
-  const [desc, setDesc] = useState("");
-  const [amount, setAmount] = useState(0.0);
-  const [category, setCategory] = useState("");
-  const [activeButton, setActiveButton] = useState("");
+export function SheetDemo({
+  trigger,
+  open,
+  onOpenChange,
+  transactionToEdit,
+}: SheetDemoProps) {
+  const [desc, setDesc] = useState(
+    transactionToEdit ? transactionToEdit.desc : ""
+  );
+  const [amount, setAmount] = useState(
+    transactionToEdit ? transactionToEdit.amount : 0
+  );
+  const [category, setCategory] = useState(
+    transactionToEdit ? transactionToEdit.category : ""
+  );
+  const [activeButton, setActiveButton] = useState(
+    transactionToEdit ? transactionToEdit.type : ""
+  );
   const dispatch = useDispatch();
-
-  const transaction: Transaction = {
-    date: "",
-    time: "",
-    desc: "",
-    category: "",
-    type: "",
-    amount: 250000,
-    id: uuidv4(),
-  };
 
   const addIncome = () => setActiveButton("income");
   const addExpense = () => setActiveButton("expense");
@@ -55,20 +67,51 @@ export function SheetDemo({ trigger }: SheetDemoProps) {
   };
 
   const saveTransaction = () => {
+    if (!amount || !category || !activeButton || !desc.trim()) {
+      toast.error("Please fill in all fields before saving.");
+      return;
+    }
+
     const now = new Date();
     const date = now.toLocaleDateString();
     const time = now.toLocaleTimeString();
-    transaction.desc = desc;
-    transaction.date = date;
-    transaction.time = time;
-    transaction.amount = amount;
-    transaction.category = category;
-    transaction.type = activeButton;
+
+    const transaction: Transaction = {
+      id: uuidv4(),
+      date,
+      time,
+      desc,
+      category,
+      type: activeButton,
+      amount,
+    };
+
     dispatch(addTransaction(transaction));
+    setActiveButton("");
+    setCategory("");
+    setDesc("");
+    setAmount(0);
+    onOpenChange?.(false);
+  };
+
+  const updateTransactionHandler = () => {
+    if (transactionToEdit) {
+      const transaction: Transaction = {
+        id: transactionToEdit.id,
+        date: transactionToEdit.date,
+        time: transactionToEdit.time,
+        desc,
+        category,
+        type: activeButton,
+        amount,
+      };
+      dispatch(updateTransactions(transaction));
+      onOpenChange?.(false);
+    }
   };
 
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={onOpenChange}>
       {trigger}
       <SheetContent className="bg-bg w-full">
         <SheetHeader>
@@ -81,6 +124,7 @@ export function SheetDemo({ trigger }: SheetDemoProps) {
             className="h-35 border-0 text-center focus-visible:ring-0 !bg-bg text-5xl md:text-5xl shadow-none"
             placeholder="1000.00"
             onChange={amountHandler}
+            value={amount}
             required
           />
         </div>
@@ -125,17 +169,18 @@ export function SheetDemo({ trigger }: SheetDemoProps) {
             "dark:hover:bg-green/10 border-0 focus-visible:ring-0"
           )}
           onChange={onDescChangehandler}
+          value={desc}
         />
         <SheetFooter>
-          <SheetClose asChild>
-            <Button
-              type="submit"
-              className="bg-green dark:bg-green/30 dark:text-white hover:bg-green/80"
-              onClick={saveTransaction}
-            >
-              Save
-            </Button>
-          </SheetClose>
+          <Button
+            type="submit"
+            className="bg-green dark:bg-green/30 dark:text-white hover:bg-green/80"
+            onClick={
+              transactionToEdit ? updateTransactionHandler : saveTransaction
+            }
+          >
+            Save
+          </Button>
           <SheetClose asChild>
             <Button variant="outline">Cancel</Button>
           </SheetClose>

@@ -1,20 +1,25 @@
 import DeleteDialog from "@/components/transaction-components/delete-dialog";
 import TransactionItem1 from "@/components/transaction-components/laptop";
 import TransactionItem2 from "@/components/transaction-components/mobile";
-import { SheetDemo } from "@/components/transaction-components/sheet";
-import { DialogTrigger } from "@/components/ui/dialog";
-import { SheetTrigger } from "@/components/ui/sheet";
-import { cn } from "@/lib/utils";
 import { selectTransactions } from "@/store/transactions/transactions.selector";
 import { clearTransactions } from "@/store/transactions/transactions.slice";
-import { Plus } from "lucide-react";
-import { useState } from "react";
+import { DialogTrigger } from "@radix-ui/react-dialog";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router";
 
-export default function TransactionsPreview() {
+const CategoryPage = () => {
+  const categoryName = useParams();
   const transactions = useSelector(selectTransactions);
-  const [openSheet, setOpenSheet] = useState(false);
   const dispatch = useDispatch();
+
+  const filteredTransactions = transactions?.filter(
+    (tx) =>
+      tx.category
+        .split(" ")[0]
+        .replace(/[^a-zA-Z0-9]/g, "")
+        .toLowerCase() === categoryName.category
+  );
+  console.log(filteredTransactions);
 
   const clearTransactionsHandler = () => dispatch(clearTransactions());
 
@@ -23,28 +28,14 @@ export default function TransactionsPreview() {
       {/* Header */}
       <div className="flex justify-center">
         <h1 className="font-semibold text-xl dark:text-white pt-4 mb-6">
-          Transactions
+          {categoryName.category &&
+            categoryName.category.charAt(0).toUpperCase() +
+              categoryName.category.slice(1)}
         </h1>
-        <SheetDemo
-          open={openSheet}
-          onOpenChange={setOpenSheet}
-          trigger={
-            <SheetTrigger asChild>
-              <div
-                className={cn(
-                  "flex h-7 w-7 items-center justify-center mt-4 rounded-full",
-                  "bg-green/30 hover:bg-green/40 text-green absolute right-[7%]"
-                )}
-              >
-                <Plus />
-              </div>
-            </SheetTrigger>
-          }
-        />
       </div>
 
       {/* Table View (Desktop) */}
-      {transactions ? (
+      {filteredTransactions?.length ? (
         <div className="hidden md:block overflow-x-auto">
           <table className="min-w-full border-separate border-spacing-y-5">
             <thead>
@@ -58,7 +49,7 @@ export default function TransactionsPreview() {
               </tr>
             </thead>
             <tbody className="py-6">
-              {transactions.map((t) => {
+              {filteredTransactions.map((t) => {
                 return <TransactionItem1 key={t.id} t={t} />;
               })}
             </tbody>
@@ -66,24 +57,25 @@ export default function TransactionsPreview() {
         </div>
       ) : (
         <div className="hidden md:flex h-[40vh] mb-0 font-bold items-center justify-center">
-          You dont have any transactions. Add a transaction...
+          You dont have any transactions in this category. Add a transaction...
         </div>
       )}
 
       {/* Card View (Mobile) */}
       <div className="space-y-3 md:hidden">
-        {transactions ? (
-          transactions.map((t) => {
+        {filteredTransactions?.length ? (
+          filteredTransactions.map((t) => {
             return <TransactionItem2 key={t.id} t={t} />;
           })
         ) : (
           <div className="h-[60vh] font-bold flex items-center text-center">
-            You dont have any transactions. Add a transaction...
+            You dont have any transactions in this category. Add a
+            transaction...
           </div>
         )}
       </div>
 
-      {transactions && (
+      {filteredTransactions?.length && (
         <DeleteDialog
           trigger={
             <DialogTrigger className="w-full flex justify-center mt-10 md:mt-8">
@@ -98,4 +90,6 @@ export default function TransactionsPreview() {
       )}
     </div>
   );
-}
+};
+
+export default CategoryPage;

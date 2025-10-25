@@ -13,17 +13,25 @@ import {
 import { useDispatch } from "react-redux";
 import { deleteTransaction } from "@/store/transactions/transactions.slice";
 import DeleteDialog from "./delete-dialog";
+import { SheetDemo } from "./sheet";
+import type { Transaction } from "@/store/transactions/transactions.types";
 
 export type DropdownMenuDialogProps = {
-  id: string;
+  t: Transaction;
 };
 
-const DropdownMenuDialog: FC<DropdownMenuDialogProps> = ({ id }) => {
+const DropdownMenuDialog: FC<DropdownMenuDialogProps> = ({ t }) => {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const [openSheet, setOpenSheet] = useState(false);
   const dispatch = useDispatch();
 
   const deleteHandler = () => {
-    dispatch(deleteTransaction(id));
+    dispatch(deleteTransaction(t.id));
+  };
+
+  const editHandler = (e: Event) => {
+    e.preventDefault();
+    setOpenSheet(true);
   };
 
   return (
@@ -34,7 +42,9 @@ const DropdownMenuDialog: FC<DropdownMenuDialogProps> = ({ id }) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-40 bg-bg" align="end">
           <DropdownMenuGroup>
-            <DropdownMenuItem>Edit</DropdownMenuItem>
+            <DropdownMenuItem onSelect={(e) => editHandler(e)}>
+              Edit
+            </DropdownMenuItem>
             <DropdownMenuItem onSelect={() => setShowDeleteDialog(true)}>
               Delete
             </DropdownMenuItem>
@@ -45,6 +55,11 @@ const DropdownMenuDialog: FC<DropdownMenuDialogProps> = ({ id }) => {
         open={showDeleteDialog}
         onOpenChange={setShowDeleteDialog}
         callback={deleteHandler}
+      />
+      <SheetDemo
+        open={openSheet}
+        onOpenChange={setOpenSheet}
+        transactionToEdit={t}
       />
     </>
   );

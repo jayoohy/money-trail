@@ -28,7 +28,7 @@ const TransactionItem2: FC<TransactionItemProps> = ({ t }) => {
         >
           {t.type === "income" ? "+" : "-"}₦{t.amount.toLocaleString()}
         </p>
-        <DropdownMenuDialog id={t.id} />
+        <DropdownMenuDialog t={t} />
       </div>
     </div>
   );

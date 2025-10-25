@@ -34,7 +34,9 @@ export function SelectScrollable({
         <SelectGroup>
           <SelectLabel>Income</SelectLabel>
           {income?.map((i) => (
-            <SelectItem value={i.name}>{i.name}</SelectItem>
+            <SelectItem key={i.id} value={i.name}>
+              {i.name}
+            </SelectItem>
           ))}
         </SelectGroup>
         <SelectGroup>

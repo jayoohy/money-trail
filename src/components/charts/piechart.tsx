@@ -1,53 +1,46 @@
 "use client";
 
-import * as React from "react";
 import { Label, Pie, PieChart } from "recharts";
 
 import {
-  type ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { useSelector } from "react-redux";
+import { selectTransactions } from "@/store/transactions/transactions.selector";
+import { chartConfig, type ChartTextProps } from "./chart-constants";
 
-export const description = "A donut chart with text";
+// eslint-disable-next-line react-refresh/only-export-components
+export function stringToColor(str: string) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  const color = Math.floor(
+    Math.abs(Math.sin(hash) * 16777215) % 16777215
+  ).toString(16);
+  return "#" + color.padStart(6, "0");
+}
 
-const chartData = [
-  { category: "Food & Dinning", amount: 720, fill: "#4ade80" },
-  { category: "Transportation", amount: 300, fill: "#facc15" },
-  { category: "Utilities", amount: 120, fill: "#60a5fa" },
-];
+export function ChartPieDonutText({ expense }: ChartTextProps) {
+  const transactions = useSelector(selectTransactions);
 
-const chartConfig = {
-  visitors: {
-    label: "Visitors",
-  },
-  chrome: {
-    label: "Chrome",
-    color: "var(--chart-1)",
-  },
-  safari: {
-    label: "Safari",
-    color: "var(--chart-2)",
-  },
-  firefox: {
-    label: "Firefox",
-    color: "var(--chart-3)",
-  },
-  edge: {
-    label: "Edge",
-    color: "var(--chart-4)",
-  },
-  other: {
-    label: "Other",
-    color: "var(--chart-5)",
-  },
-} satisfies ChartConfig;
-
-export function ChartPieDonutText() {
-  const totalAmount = React.useMemo(() => {
-    return chartData.reduce((acc, curr) => acc + curr.amount, 0);
-  }, []);
+  const expenseData = transactions
+    ?.filter((t) => t.type === "expense")
+    .reduce((acc, t) => {
+      const existing = acc.find((item) => item.category === t.category);
+      if (existing) {
+        existing.amount += t.amount;
+      } else {
+        acc.push({
+          category: t.category,
+          amount: t.amount,
+          fill: stringToColor(t.category),
+        });
+      }
+      return acc;
+    }, [] as { category: string; amount: number; fill: string }[]);
 
   return (
     <div className="text-gray-600 dark:text-gray-400">
@@ -56,13 +49,13 @@ export function ChartPieDonutText() {
         config={chartConfig}
         className="mx-auto aspect-square max-h-[250px]"
       >
-        <PieChart className="text-black dark:text-white">
+        <PieChart>
           <ChartTooltip
             cursor={false}
             content={<ChartTooltipContent hideLabel />}
           />
           <Pie
-            data={chartData}
+            data={expenseData}
             dataKey="amount"
             nameKey="category"
             innerRadius={80}
@@ -86,7 +79,7 @@ export function ChartPieDonutText() {
                         y={viewBox.cy}
                         className="text-3xl font-bold"
                       >
-                        ${totalAmount.toLocaleString()}
+                        ₦{expense || 0}
                       </tspan>
                     </text>
                   );
@@ -97,33 +90,20 @@ export function ChartPieDonutText() {
         </PieChart>
       </ChartContainer>
       <div className="mt-2 space-y-2">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="h-3 w-3 rounded-full bg-[#4ade80]"></span>
-            <span className="text-sm text-gray-600 dark:text-gray-400">
-              Food & Dining
-            </span>
+        {expenseData?.map((cat) => (
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span
+                className="h-3 w-3 rounded-full"
+                style={{ backgroundColor: cat.fill }}
+              ></span>
+              <span className="text-sm text-gray-600 dark:text-gray-400">
+                {cat.category}
+              </span>
+            </div>
+            <span className="font-medium">₦{cat.amount}</span>
           </div>
-          <span className="font-medium">$720</span>
-        </div>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="h-3 w-3 rounded-full bg-[#facc15]"></span>
-            <span className="text-sm text-gray-600 dark:text-gray-400">
-              Transportation
-            </span>
-          </div>
-          <span className="font-medium">$300</span>
-        </div>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="h-3 w-3 rounded-full bg-[#60a5fa]"></span>
-            <span className="text-sm text-gray-600 dark:text-gray-400">
-              Utilities
-            </span>
-          </div>
-          <span className="font-medium">$180</span>
-        </div>
+        ))}
       </div>
     </div>
   );

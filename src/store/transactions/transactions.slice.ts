@@ -11,40 +11,40 @@ export type TransactionsState = {
 export const TRANSACTIONS_INITIAL_STATE: TransactionsState = {
   transactions: [
     {
-      date: "2025-10-10",
-      time: "10am",
+      date: "10/10/2025",
+      time: "10:00:00 AM",
       desc: "October Salary",
       category: "Salary",
       type: "income",
       amount: 250000,
     },
     {
-      date: "2025-10-11",
-      time: "10am",
+      date: "10/11/2025",
+      time: "10:00:00 AM",
       desc: "Groceries",
       category: "Food & Drink",
       type: "expense",
       amount: 18000,
     },
     {
-      date: "2025-10-12",
-      time: "10am",
+      date: "10/12/2025",
+      time: "10:00:00 AM",
       desc: "Apartment Rent",
       category: "Housing",
       type: "expense",
       amount: 70000,
     },
     {
-      date: "2025-10-12",
-      time: "10am",
+      date: "10/12/2025",
+      time: "10:00:00 AM",
       desc: "Client Project",
       category: "Business Profit",
       type: "income",
       amount: 120000,
     },
     {
-      date: "2025-10-13",
-      time: "10am",
+      date: "10/13/2025",
+      time: "10:00:00 AM",
       desc: "Fuel & Transport",
       category: "Transportation",
       type: "expense",
@@ -66,12 +66,21 @@ export const transactionsSlice = createSlice({
         state.transactions = [action.payload];
       }
     },
+    updateTransactions: (state, action: PayloadAction<Transaction>) => {
+      if (state.transactions) {
+        const updated = action.payload;
+        const index = state.transactions.findIndex((t) => t.id === updated.id);
+        if (index !== -1) {
+          state.transactions[index] = updated;
+        }
+      }
+    },
     deleteTransaction: (state, action: PayloadAction<string>) => {
       if (state.transactions) {
-        const newTransaction = state.transactions.filter(
+        const newTransactions = state.transactions.filter(
           (category) => category.id != action.payload
         );
-        state.transactions = newTransaction;
+        state.transactions = newTransactions;
       }
     },
     clearTransactions: (state) => {
@@ -80,7 +89,11 @@ export const transactionsSlice = createSlice({
   },
 });
 
-export const { addTransaction, deleteTransaction, clearTransactions } =
-  transactionsSlice.actions;
+export const {
+  addTransaction,
+  updateTransactions,
+  deleteTransaction,
+  clearTransactions,
+} = transactionsSlice.actions;
 
 export const transactionsReducer = transactionsSlice.reducer;
