@@ -7,16 +7,18 @@ import {
 } from "lucide-react";
 import { useState, type FC } from "react";
 import { DialogTrigger } from "@/components/ui/dialog";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteTransaction } from "@/store/transactions/transactions.slice";
 import DeleteDialog from "./delete-dialog";
 import { SheetDemo } from "./sheet";
+import { selectCurrency } from "@/store/settings/settings.selector";
 
 export type TransactionItemProps = {
   t: Transaction;
 };
 
 const TransactionItem1: FC<TransactionItemProps> = ({ t }) => {
+  const currency = useSelector(selectCurrency);
   const dispatch = useDispatch();
   const [openSheet, setOpenSheet] = useState(false);
 
@@ -62,7 +64,9 @@ const TransactionItem1: FC<TransactionItemProps> = ({ t }) => {
             t.type === "income" ? "text-green" : "text-red-500"
           }`}
         >
-          {t.type === "income" ? "+" : "-"}₦{t.amount.toLocaleString()}
+          {t.type === "income" ? "+" : "-"}
+          {currency}
+          {t.amount.toLocaleString()}
         </td>
         <td className="px-3 py-2 flex justify-center gap-3">
           <button

@@ -5,8 +5,12 @@ import {
 import type { FC } from "react";
 import type { TransactionItemProps } from "./laptop";
 import DropdownMenuDialog from "./dropdown";
+import { useSelector } from "react-redux";
+import { selectCurrency } from "@/store/settings/settings.selector";
 
 const TransactionItem2: FC<TransactionItemProps> = ({ t }) => {
+  const currency = useSelector(selectCurrency);
+
   return (
     <div className="p-3 rounded-lg bg-white dark:bg-green/10 flex justify-between items-center shadow-sm">
       <div className="flex items-center gap-2">
@@ -26,7 +30,9 @@ const TransactionItem2: FC<TransactionItemProps> = ({ t }) => {
             t.type === "income" ? "text-green" : "text-red-500"
           }`}
         >
-          {t.type === "income" ? "+" : "-"}₦{t.amount.toLocaleString()}
+          {t.type === "income" ? "+" : "-"}
+          {currency}
+          {t.amount.toLocaleString()}
         </p>
         <DropdownMenuDialog t={t} />
       </div>

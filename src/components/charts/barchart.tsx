@@ -11,11 +11,13 @@ import { useSelector } from "react-redux";
 import { selectTransactions } from "@/store/transactions/transactions.selector";
 import { stringToColor } from "./piechart";
 import { chartConfig, type ChartTextProps } from "./chart-constants";
+import { selectCurrency } from "@/store/settings/settings.selector";
 
 export const description = "A bar chart";
 
 export function ChartBarDefault({ expense }: ChartTextProps) {
   const transactions = useSelector(selectTransactions);
+  const currency = useSelector(selectCurrency);
 
   const expenseData = transactions
     ?.filter((t) => t.type === "expense")
@@ -40,7 +42,8 @@ export function ChartBarDefault({ expense }: ChartTextProps) {
           Spending by Category
         </p>
         <p className="font-semibold text-black dark:text-white text-[1.3rem]">
-          ₦{expense || 0}
+          {currency}
+          {expense || 0}
         </p>
       </div>
       <div className="flex justify-center">

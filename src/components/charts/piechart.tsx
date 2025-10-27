@@ -10,6 +10,7 @@ import {
 import { useSelector } from "react-redux";
 import { selectTransactions } from "@/store/transactions/transactions.selector";
 import { chartConfig, type ChartTextProps } from "./chart-constants";
+import { selectCurrency } from "@/store/settings/settings.selector";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export function stringToColor(str: string) {
@@ -25,6 +26,7 @@ export function stringToColor(str: string) {
 
 export function ChartPieDonutText({ expense }: ChartTextProps) {
   const transactions = useSelector(selectTransactions);
+  const currency = useSelector(selectCurrency);
 
   const expenseData = transactions
     ?.filter((t) => t.type === "expense")
@@ -79,7 +81,8 @@ export function ChartPieDonutText({ expense }: ChartTextProps) {
                         y={viewBox.cy}
                         className="text-3xl font-bold"
                       >
-                        ₦{expense || 0}
+                        {currency}
+                        {expense || 0}
                       </tspan>
                     </text>
                   );
@@ -101,7 +104,10 @@ export function ChartPieDonutText({ expense }: ChartTextProps) {
                 {cat.category}
               </span>
             </div>
-            <span className="font-medium">₦{cat.amount}</span>
+            <span className="font-medium">
+              {currency}
+              {cat.amount}
+            </span>
           </div>
         ))}
       </div>

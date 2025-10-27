@@ -1,8 +1,16 @@
 import { cn } from "@/lib/utils";
-import { LayoutDashboard, ScrollText, Settings, Shapes } from "lucide-react";
-import { Link } from "react-router";
+import {
+  LayoutDashboard,
+  ScrollText,
+  Settings,
+  SquareChartGantt,
+} from "lucide-react";
+import { Link, useLocation } from "react-router";
 
 const Navbar = () => {
+  const location = useLocation();
+  const link = location.pathname;
+
   return (
     <>
       <div
@@ -13,19 +21,43 @@ const Navbar = () => {
           "*:hover:text-green"
         )}
       >
-        <Link to="/" className="flex flex-col items-center">
+        <Link
+          to="/"
+          className={cn(
+            "flex flex-col items-center",
+            link === "/" && "text-green"
+          )}
+        >
           <LayoutDashboard className="size-7" />
           <p className="text-sm pt-1">Dashboard</p>
         </Link>
-        <Link to="/transactions" className="flex flex-col items-center">
+        <Link
+          to="/transactions"
+          className={cn(
+            "flex flex-col items-center",
+            link === "/transactions" && "text-green"
+          )}
+        >
           <ScrollText className="size-7" />
           <p className="text-sm pt-1">Transactions</p>
         </Link>
-        <Link to="/categories" className="flex flex-col items-center">
-          <Shapes className="size-7" />
-          <p className="text-sm pt-1">Categories</p>
+        <Link
+          to="/reports"
+          className={cn(
+            "flex flex-col items-center",
+            link === "/reports" && "text-green"
+          )}
+        >
+          <SquareChartGantt className="size-7" />
+          <p className="text-sm pt-1">Reports</p>
         </Link>
-        <Link to="/settings" className="flex flex-col items-center">
+        <Link
+          to="/settings"
+          className={cn(
+            "flex flex-col items-center",
+            link === "/settings" && "text-green"
+          )}
+        >
           <Settings className="size-7" />
           <p className="text-sm pt-1">Settings</p>
         </Link>

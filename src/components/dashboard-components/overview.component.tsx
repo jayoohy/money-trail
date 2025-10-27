@@ -1,5 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { selectCurrency } from "@/store/settings/settings.selector";
 import type { FC } from "react";
+import { useSelector } from "react-redux";
 
 interface OverviewProps {
   balance: number | undefined;
@@ -8,6 +10,8 @@ interface OverviewProps {
 }
 
 const Overview: FC<OverviewProps> = ({ balance, income, expense }) => {
+  const currency = useSelector(selectCurrency);
+
   return (
     <section>
       <h2 className="hidden md:flex font-semibold text-lg pb-2 text-foreground">
@@ -22,7 +26,8 @@ const Overview: FC<OverviewProps> = ({ balance, income, expense }) => {
                 Balance
               </CardTitle>
               <p className="text-2xl font-semibold text-foreground">
-                ₦{balance || 0}
+                {currency}
+                {balance || 0}
               </p>
               <p className="text-sm text-muted-foreground">Available</p>
             </div>
@@ -34,7 +39,8 @@ const Overview: FC<OverviewProps> = ({ balance, income, expense }) => {
           <CardContent className="p-4">
             <p className="text-sm text-muted-foreground">Income</p>
             <p className="text-xl font-semibold text-foreground">
-              ₦{income || 0}
+              {currency}
+              {income || 0}
             </p>
           </CardContent>
         </Card>
@@ -43,7 +49,8 @@ const Overview: FC<OverviewProps> = ({ balance, income, expense }) => {
           <CardContent className="p-4">
             <p className="text-sm text-muted-foreground">Expenses</p>
             <p className="text-xl font-semibold text-foreground">
-              ₦{expense || 0}
+              {currency}
+              {expense || 0}
             </p>
           </CardContent>
         </Card>

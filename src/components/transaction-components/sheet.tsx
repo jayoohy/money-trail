@@ -17,12 +17,13 @@ import { cn } from "@/lib/utils";
 import { Textarea } from "../ui/textarea";
 import type { Transaction } from "@/store/transactions/transactions.types";
 import { v4 as uuidv4 } from "uuid";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   addTransaction,
   updateTransactions,
 } from "@/store/transactions/transactions.slice";
 import { toast } from "sonner";
+import { selectCurrency } from "@/store/settings/settings.selector";
 
 interface SheetDemoProps {
   trigger?: ReactNode;
@@ -50,6 +51,8 @@ export function SheetDemo({
     transactionToEdit ? transactionToEdit.type : ""
   );
   const dispatch = useDispatch();
+
+  const currency = useSelector(selectCurrency);
 
   const addIncome = () => setActiveButton("income");
   const addExpense = () => setActiveButton("expense");
@@ -118,7 +121,7 @@ export function SheetDemo({
           <SheetTitle className="text-center">New Transaction</SheetTitle>
         </SheetHeader>
         <div className="flex items-center pl-5">
-          <div className="text-green text-4xl">$</div>
+          <div className="text-green text-4xl">{currency}</div>
           <Input
             type="number"
             className="h-35 border-0 text-center focus-visible:ring-0 !bg-bg text-5xl md:text-5xl shadow-none"

@@ -8,6 +8,8 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { chartConfig, type ChartTextProps } from "./chart-constants";
+import { useSelector } from "react-redux";
+import { selectCurrency } from "@/store/settings/settings.selector";
 
 export const description = "A simple area chart";
 
@@ -27,12 +29,15 @@ const chartData = [
 ];
 
 export function ChartAreaDefault({ balance }: ChartTextProps) {
+  const currency = useSelector(selectCurrency);
+
   return (
     <div className="text-gray-600 dark:text-gray-400">
       <div className="p-3">
         <p className="text-sm">Balance Snapshot</p>
         <p className="font-semibold text-black dark:text-white text-[1.3rem]">
-          ₦{balance || 0}
+          {currency}
+          {balance || 0}
         </p>
       </div>
       <div className="flex justify-center">
