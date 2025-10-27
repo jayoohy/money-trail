@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import { selectTransactions } from "@/store/transactions/transactions.selector";
 import { chartConfig, type ChartTextProps } from "./chart-constants";
 import { selectCurrency } from "@/store/settings/settings.selector";
+import { useTheme } from "../themes/theme-provider";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export function stringToColor(str: string) {
@@ -24,9 +25,11 @@ export function stringToColor(str: string) {
   return "#" + color.padStart(6, "0");
 }
 
-export function ChartPieDonutText({ expense }: ChartTextProps) {
+function ChartPieDonutText({ expense }: ChartTextProps) {
   const transactions = useSelector(selectTransactions);
   const currency = useSelector(selectCurrency);
+  const { theme } = useTheme();
+  const textColor = theme === "dark" ? "#fff" : "#000";
 
   const expenseData = transactions
     ?.filter((t) => t.type === "expense")
@@ -72,6 +75,7 @@ export function ChartPieDonutText({ expense }: ChartTextProps) {
                       y={viewBox.cy}
                       textAnchor="middle"
                       dominantBaseline="middle"
+                      fill={textColor}
                     >
                       <tspan x={viewBox.cx} y={(viewBox.cy || 0) - 28}>
                         Total spent
@@ -114,3 +118,5 @@ export function ChartPieDonutText({ expense }: ChartTextProps) {
     </div>
   );
 }
+
+export default ChartPieDonutText;

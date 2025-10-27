@@ -1,6 +1,8 @@
-import { ChartAreaDefault } from "../charts/areachart";
+import { lazy } from "react";
 import type { ChartTextProps } from "../charts/chart-constants";
 import { Card, CardContent } from "../ui/card";
+
+const ChartAreaDefault = lazy(() => import("@/components/charts/areachart"));
 
 const Balance = ({ balance }: ChartTextProps) => {
   return (

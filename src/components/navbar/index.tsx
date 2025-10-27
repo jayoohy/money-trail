@@ -22,10 +22,10 @@ const Navbar = () => {
         )}
       >
         <Link
-          to="/"
+          to="/dashboard"
           className={cn(
             "flex flex-col items-center",
-            link === "/" && "text-green"
+            link === "/dashboard" && "text-green"
           )}
         >
           <LayoutDashboard className="size-7" />

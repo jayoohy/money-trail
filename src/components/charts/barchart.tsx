@@ -15,7 +15,7 @@ import { selectCurrency } from "@/store/settings/settings.selector";
 
 export const description = "A bar chart";
 
-export function ChartBarDefault({ expense }: ChartTextProps) {
+function ChartBarDefault({ expense }: ChartTextProps) {
   const transactions = useSelector(selectTransactions);
   const currency = useSelector(selectCurrency);
 
@@ -66,3 +66,5 @@ export function ChartBarDefault({ expense }: ChartTextProps) {
     </div>
   );
 }
+
+export default ChartBarDefault;

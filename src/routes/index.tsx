@@ -3,6 +3,7 @@ import { lazy } from "react";
 import { ThemeProvider } from "@/components/themes/theme-provider";
 import AppLayout from "@/layout";
 import CategoryPage from "./category";
+import LandingPage from "./home/home";
 
 const Dashboard = lazy(() => import("./dashboard"));
 const Categories = lazy(() => import("./categories"));
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
+        element: <LandingPage />,
+      },
+      {
+        path: "dashboard",
         element: <Dashboard />,
       },
       {

@@ -28,7 +28,7 @@ const chartData = [
   { month: "Dec", amount: 200 },
 ];
 
-export function ChartAreaDefault({ balance }: ChartTextProps) {
+function ChartAreaDefault({ balance }: ChartTextProps) {
   const currency = useSelector(selectCurrency);
 
   return (
@@ -78,3 +78,4 @@ export function ChartAreaDefault({ balance }: ChartTextProps) {
     </div>
   );
 }
+export default ChartAreaDefault;

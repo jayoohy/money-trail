@@ -4,11 +4,9 @@ import Overview from "@/components/dashboard-components/overview.component";
 import Recent from "@/components/dashboard-components/recent.component";
 import Spending from "@/components/dashboard-components/spending.component";
 import { useSelector } from "react-redux";
-// import { selectCurrency } from "@/store/settings/settings.selector";
 import { selectTransactions } from "@/store/transactions/transactions.selector";
 
 const Dashboard = () => {
-  // const currency = useSelector(selectCurrency);
   const transactions = useSelector(selectTransactions);
 
   const incomeTransactions = React.useMemo(() => {

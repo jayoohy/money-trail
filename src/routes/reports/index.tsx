@@ -4,11 +4,12 @@ import { useSelector } from "react-redux";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { selectTransactions } from "@/store/transactions/transactions.selector";
-import BarChartDemo from "@/components/charts/barchart2";
 import type { Transaction } from "@/store/transactions/transactions.types";
-import { ChartPieDonutText } from "@/components/charts/piechart";
-import { ChartAreaDefault } from "@/components/charts/areachart";
 import { selectCurrency } from "@/store/settings/settings.selector";
+import { lazy } from "react";
+const ChartPieDonutText = lazy(() => import("@/components/charts/piechart"));
+const ChartAreaDefault = lazy(() => import("@/components/charts/areachart"));
+const BarChartDemo = lazy(() => import("@/components/charts/barchart2"));
 
 export default function ReportsPage() {
   const transactions = useSelector(selectTransactions);

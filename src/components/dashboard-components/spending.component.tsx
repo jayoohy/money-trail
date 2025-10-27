@@ -1,6 +1,7 @@
-import { ChartBarDefault } from "../charts/barchart";
-import { ChartPieDonutText } from "../charts/piechart";
+import { lazy } from "react";
 import { Card, CardContent } from "../ui/card";
+const ChartPieDonutText = lazy(() => import("@/components/charts/piechart"));
+const ChartBarDefault = lazy(() => import("@/components/charts/barchart"));
 
 type SpendingProps = {
   expense: number | undefined;
