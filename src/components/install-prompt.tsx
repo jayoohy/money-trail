@@ -9,6 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "./ui/dialog";
+import { Share } from "lucide-react";
 
 export default function PWAInstallPrompt() {
   const { canInstall, promptInstall, isIos, isInStandaloneMode } =
@@ -21,11 +22,8 @@ export default function PWAInstallPrompt() {
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Add to Home Screen</DialogTitle>
-            <DialogDescription>
-              On iOS Safari, tap the{" "}
-              <span role="img" aria-label="share">
-                🔗
-              </span>{" "}
+            <DialogDescription className="inline-flex items-center justify-center flex-wrap gap-1 text-center">
+              On iOS Safari, tap the <Share size={16} />
               icon, then choose <strong>Add to Home Screen</strong>.
             </DialogDescription>
           </DialogHeader>
