@@ -23,7 +23,7 @@ const Dashboard = () => {
     return expenseTransactions?.reduce((acc, val) => acc + val.amount, 0);
   }, [expenseTransactions]);
 
-  const balance = totalIncome && totalExpense && totalIncome - totalExpense;
+  const balance = (totalIncome ?? 0) - (totalExpense ?? 0);
 
   return (
     <>

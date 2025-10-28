@@ -25,7 +25,19 @@ export default function ReportsPage() {
     ?.filter((t: Transaction) => t.type === "expense")
     .reduce((sum: number, t: Transaction) => sum + t.amount, 0);
 
-  const balance = totalIncome && totalExpense && totalIncome - totalExpense;
+  const balance = (totalIncome ?? 0) - (totalExpense ?? 0);
+
+  // Savings rate (percentage)
+  const savingsRate =
+    totalIncome && totalIncome > 0
+      ? Math.max(
+          0,
+          Math.min(
+            ((totalIncome - (totalExpense ?? 0)) / totalIncome) * 100,
+            100
+          )
+        )
+      : 0;
 
   // Top spending category
   const expenseCategories: Record<string, number> = {};
@@ -119,25 +131,16 @@ export default function ReportsPage() {
             </CardTitle>
           </CardHeader>
           <CardContent className="py-0">
-            {totalIncome && totalExpense && totalIncome > 0 ? (
+            {totalIncome && totalIncome > 0 ? (
               <>
                 <p className="text-lg font-semibold dark:text-white">
-                  {totalIncome &&
-                    totalExpense &&
-                    (
-                      ((totalIncome - totalExpense) / totalIncome) *
-                      100
-                    ).toFixed(1)}
-                  %
+                  {savingsRate.toFixed(1)}%
                 </p>
                 <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
                   <div
                     className="bg-green-600 h-2 rounded-full"
                     style={{
-                      width: `${Math.min(
-                        ((totalIncome - totalExpense) / totalIncome) * 100,
-                        100
-                      )}%`,
+                      width: `${savingsRate}%`,
                     }}
                   ></div>
                 </div>
@@ -159,16 +162,10 @@ export default function ReportsPage() {
                 🏆 Your top spending category is <b>{topCategory[0]}</b>.
               </li>
             )}
-            {totalIncome && totalExpense && totalIncome > 0 && (
+            {totalIncome && totalIncome > 0 && (
               <li>
-                💡 You saved{" "}
-                <b>
-                  {(((totalIncome - totalExpense) / totalIncome) * 100).toFixed(
-                    1
-                  )}
-                  %
-                </b>{" "}
-                of your income this period.
+                💡 You saved <b>{savingsRate.toFixed(1)}%</b> of your income
+                this period.
               </li>
             )}
             <li>
