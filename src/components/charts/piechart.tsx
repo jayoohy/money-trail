@@ -29,8 +29,6 @@ function ChartPieDonutText({ expense }: ChartTextProps) {
   const currency = useSelector(selectCurrency);
   const { theme } = useTheme();
 
-  const textColor = theme === "dark" ? "#ffffff" : "#000000";
-
   const expenseData = transactions
     ?.filter((t) => t.type === "expense")
     .reduce((acc, t) => {
@@ -76,7 +74,8 @@ function ChartPieDonutText({ expense }: ChartTextProps) {
                       y={viewBox.cy}
                       textAnchor="middle"
                       dominantBaseline="middle"
-                      fill={textColor}
+                      fill={"currentColor"}
+                      className="text-foreground"
                     >
                       <tspan x={viewBox.cx} y={(viewBox.cy || 0) - 28}>
                         Total spent
