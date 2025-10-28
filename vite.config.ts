@@ -26,31 +26,25 @@ export default defineConfig({
         background_color: "#f9fff9",
         display: "standalone",
         scope: "/",
-        start_url: ".",
+        start_url: "/",
         icons: [
-          {
-            src: "/images/favicon-96x96.png",
-            sizes: "96x96",
-            type: "image/png",
-            purpose: "any maskable",
-          },
-          {
-            src: "/images/apple-touch-icon.png",
-            sizes: "180x180",
-            type: "image/png",
-            purpose: "maskable any",
-          },
           {
             src: "/images/web-app-manifest-192x192.png",
             sizes: "192x192",
             type: "image/png",
-            purpose: "any maskable",
+            purpose: "any",
           },
           {
             src: "/images/web-app-manifest-512x512.png",
             sizes: "512x512",
             type: "image/png",
-            purpose: "any maskable",
+            purpose: "any",
+          },
+          {
+            src: "/images/apple-touch-icon.png",
+            sizes: "180x180",
+            type: "image/png",
+            purpose: "maskable",
           },
         ],
       },
@@ -77,5 +71,16 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          "react-vendor": ["react", "react-dom", "react-router"],
+          charts: ["recharts"],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 1000,
   },
 });

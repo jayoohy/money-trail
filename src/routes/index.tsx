@@ -1,9 +1,10 @@
 import { createBrowserRouter } from "react-router";
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
 import { ThemeProvider } from "@/components/themes/theme-provider";
 import AppLayout from "@/layout";
 import CategoryPage from "./category";
 import LandingPage from "./home/home";
+import Spinner from "@/components/spinner/spinner.component";
 
 const Dashboard = lazy(() => import("./dashboard"));
 const Categories = lazy(() => import("./categories"));
@@ -16,8 +17,10 @@ const router = createBrowserRouter([
     path: "/",
     element: (
       <>
-        <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
-          <AppLayout />
+        <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+          <Suspense fallback={<Spinner />}>
+            <AppLayout />
+          </Suspense>
         </ThemeProvider>
       </>
     ),

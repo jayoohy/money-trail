@@ -1,7 +1,6 @@
 "use client";
 
 import { Label, Pie, PieChart } from "recharts";
-
 import {
   ChartContainer,
   ChartTooltip,
@@ -9,8 +8,8 @@ import {
 } from "@/components/ui/chart";
 import { useSelector } from "react-redux";
 import { selectTransactions } from "@/store/transactions/transactions.selector";
-import { chartConfig, type ChartTextProps } from "./chart-constants";
 import { selectCurrency } from "@/store/settings/settings.selector";
+import { chartConfig, type ChartTextProps } from "./chart-constants";
 import { useTheme } from "../themes/theme-provider";
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -29,7 +28,8 @@ function ChartPieDonutText({ expense }: ChartTextProps) {
   const transactions = useSelector(selectTransactions);
   const currency = useSelector(selectCurrency);
   const { theme } = useTheme();
-  const textColor = theme === "dark" ? "#fff" : "#000";
+
+  const textColor = theme === "dark" ? "#ffffff" : "#000000";
 
   const expenseData = transactions
     ?.filter((t) => t.type === "expense")
@@ -51,6 +51,7 @@ function ChartPieDonutText({ expense }: ChartTextProps) {
     <div className="text-gray-600 dark:text-gray-400">
       <p className="pt-3 pl-1 text-sm">Spending by Category</p>
       <ChartContainer
+        key={theme}
         config={chartConfig}
         className="mx-auto aspect-square max-h-[250px]"
       >
@@ -96,9 +97,10 @@ function ChartPieDonutText({ expense }: ChartTextProps) {
           </Pie>
         </PieChart>
       </ChartContainer>
+
       <div className="mt-2 space-y-2">
         {expenseData?.map((cat) => (
-          <div className="flex items-center justify-between">
+          <div key={cat.category} className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span
                 className="h-3 w-3 rounded-full"

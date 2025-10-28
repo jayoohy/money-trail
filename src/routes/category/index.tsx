@@ -1,16 +1,12 @@
-import DeleteDialog from "@/components/transaction-components/delete-dialog";
 import TransactionItem1 from "@/components/transaction-components/laptop";
 import TransactionItem2 from "@/components/transaction-components/mobile";
 import { selectTransactions } from "@/store/transactions/transactions.selector";
-import { clearTransactions } from "@/store/transactions/transactions.slice";
-import { DialogTrigger } from "@radix-ui/react-dialog";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 
 const CategoryPage = () => {
   const categoryName = useParams();
   const transactions = useSelector(selectTransactions);
-  const dispatch = useDispatch();
 
   const filteredTransactions = transactions?.filter(
     (tx) =>
@@ -19,9 +15,6 @@ const CategoryPage = () => {
         .replace(/[^a-zA-Z0-9]/g, "")
         .toLowerCase() === categoryName.category
   );
-  console.log(filteredTransactions);
-
-  const clearTransactionsHandler = () => dispatch(clearTransactions());
 
   return (
     <div className="px-4 md:px-6 lg:px-20 xl:px-30 space-y-6 pb-40 md:pb-35">
@@ -74,20 +67,6 @@ const CategoryPage = () => {
           </div>
         )}
       </div>
-
-      {filteredTransactions?.length && (
-        <DeleteDialog
-          trigger={
-            <DialogTrigger className="w-full flex justify-center mt-10 md:mt-8">
-              <div className="bg-red-500/30 hover:bg-red-500/20 text-red-500 p-2.5 rounded-lg">
-                Clear All Transactions
-              </div>
-            </DialogTrigger>
-          }
-          callback={clearTransactionsHandler}
-          clear={true}
-        />
-      )}
     </div>
   );
 };
