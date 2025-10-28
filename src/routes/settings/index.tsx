@@ -25,7 +25,7 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="p-6 space-y-6 max-w-4xl mx-auto">
+    <div className="p-6 space-y-6 max-w-4xl mx-auto mb-25">
       <h1 className="text-2xl text-center font-semibold text-gray-800 dark:text-white mb-4">
         Settings
       </h1>

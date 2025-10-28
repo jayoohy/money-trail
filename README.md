@@ -1,79 +1,136 @@
 # Finance Tracker
 
-A modern web application for tracking personal finances, built with React, TypeScript, and Vite.
+A modern web application for tracking personal finances, built with React, TypeScript, and Vite. Features a responsive design with dark/light mode support and PWA capabilities.
 
-## Features
+## 🚀 Features
 
-- 📊 Dashboard with financial overview and charts
-- 💰 Track income and expenses
-- 📱 Responsive design for mobile and desktop
-- 🌓 Light/Dark mode support
-- 📁 Category management
-- 📈 Visual reports and analytics
-- 💾 Persistent storage using Redux and localStorage
+- 📊 **Interactive Dashboard**
 
-## Tech Stack
+  - Financial overview with multiple chart types
+  - Recent transactions list
+  - Current balance display
+  - Spending breakdown by category
 
-- [React](https://react.dev) - UI Library
-- [TypeScript](https://www.typescriptlang.org/) - Type Safety
-- [Vite](https://vitejs.dev/) - Build Tool
-- [Redux Toolkit](https://redux-toolkit.js.org/) - State Management
-- [Redux Persist](https://github.com/rt2zz/redux-persist) - State Persistence
-- [Recharts](https://recharts.org/) - Data Visualization
-- [Tailwind CSS](https://tailwindcss.com/) - Styling
-- [Radix UI](https://www.radix-ui.com/) - UI Components
-- [React Router](https://reactrouter.com/) - Routing
+- 💰 **Transaction Management**
 
-## Project Structure
+  - Add/Edit/Delete transactions
+  - Categorize expenses and income
+  - Date tracking
+  - Notes and descriptions
+
+- 🎨 **User Experience**
+
+  - Responsive design (mobile & desktop layouts)
+  - Dark/Light theme toggle
+  - PWA support for offline access
+  - Toast notifications
+  - Loading states with spinners
+
+- 📈 **Analytics**
+  - Pie charts for spending breakdown
+  - Bar charts for category comparison
+  - Area charts for balance trends
+  - Detailed reports view
+
+## 🛠️ Tech Stack
+
+- **Frontend Framework**: React 18 with TypeScript
+- **Build Tool**: Vite
+- **State Management**: Redux Toolkit + Redux Persist
+- **Styling**:
+  - Tailwind CSS
+  - ShadCN Components
+  - CSS-in-JS with styled-components
+- **Data Visualization**: Recharts
+- **Routing**: React Router v6
+- **PWA**: Custom service worker + manifest
+
+## 📁 Project Structure
 
 ```
 src/
-├── assets/         # Static assets
-├── components/     # React components
-├── layout/         # Layout components
-├── lib/           # Utility functions
-├── routes/        # Route components
-└── store/         # Redux store setup
+├── assets/                 # Static assets and images
+├── components/
+│   ├── charts/            # Data visualization components
+│   ├── dashboard/         # Dashboard-specific components
+│   ├── transaction/       # Transaction-related components
+│   ├── themes/            # Theme providers and toggles
+│   └── ui/               # Reusable UI components
+├── hooks/                 # Custom React hooks
+├── layout/                # Layout components
+├── lib/                   # Utility functions
+├── routes/                # Route components and pages
+└── store/                 # Redux store configuration
+    ├── categories/        # Category state management
+    ├── settings/          # App settings state
+    └── transactions/      # Transaction state management
 ```
 
-## Getting Started
+## 🚦 Getting Started
 
-1. Clone the repository:
+1. **Clone and Install:**
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/yourusername/finance-tracker.git
 cd finance-tracker
-```
-
-2. Install dependencies:
-
-```bash
 npm install
 ```
 
-3. Start the development server:
+2. **Development:**
 
 ```bash
 npm run dev
 ```
 
-4. Open [http://localhost:5173](http://localhost:5173) to view it in your browser
+Open [http://localhost:5173](http://localhost:5173)
 
-## Available Scripts
+3. **Production Build:**
+
+```bash
+npm run build
+npm run preview
+```
+
+## 📱 PWA Setup
+
+1. Ensure the manifest is properly configured in `public/manifest.webmanifest`
+2. Install app when prompted or use browser's install option
+3. App works offline after first load
+
+## 🛠️ Available Scripts
 
 - `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run lint` - Run ESLint
+- `npm run build` - Create production build
 - `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
 
-## Contributing
+## 🤝 Contributing
 
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+2. Create your feature branch:
 
-## License
+```bash
+git checkout -b feature/AmazingFeature
+```
+
+3. Commit your changes:
+
+```bash
+git commit -m 'Add some AmazingFeature'
+```
+
+4. Push to the branch:
+
+```bash
+git push origin feature/AmazingFeature
+```
+
+## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+
+## 🙏 Acknowledgments
+
+- [ShadCN](https://ui.shadcn.com/) for accessible components
+- [Recharts](https://recharts.org/) for chart components
+- [Tailwind CSS](https://tailwindcss.com/) for styling utilities
